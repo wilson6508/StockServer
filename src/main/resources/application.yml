@@ -1,0 +1,22 @@
+server:
+  port: 10002
+spring:
+  profiles:
+    active: dev
+  output:
+    ansi:
+      enabled: always
+  datasource:
+    username: root
+    password: 1234
+  jpa:
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+timeOut: 1200
+testApi: https://script.google.com/macros/s/AKfycbw5PnzwybI_VoZaHz65TpA5DYuLkxIF-HUGjJ6jRTOje0E6bVo/exec?name={name}&age={age}
+databaseApi: https://release-test2.opview.com.tw/eduApi/login
+readExcelApi: https://script.google.com/macros/s/AKfycbyVL0xx9EyAPyWKOi0iyxMTTYcxZeAiubjxiYdwlnk_0XPdJWxJwUE7SWk2rcQBnCDv/exec?excelPage=%d&excelUrl=%s
+excelUrl: https://docs.google.com/spreadsheets/d/1pwnsPU4Ch2CjPGEXucU4qnsPoMpDoVNDRe9rORIZhIQ/edit#gid=0
+#spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
