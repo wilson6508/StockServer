@@ -1,4 +1,4 @@
-package com.service;
+package com.service.test;
 
 import com.google.gson.Gson;
 import com.model.entity.TwEtfInfoEntity;

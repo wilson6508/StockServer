@@ -8,23 +8,34 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.ValueRange;
+import com.model.prop.PropertiesBean;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
 
 @Service
 public class GoogleSheetService {
 
-    private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
+    @Resource
+    PropertiesBean propertiesBean;
+
+    //private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
+    //private static final String CREDENTIALS_FILE_PATH = "C:/report/credentials.json";
     private static final List<String> SCOPES = Collections.singletonList(SheetsScopes.DRIVE);
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String APPLICATION_NAME = "SheetApi";
 
     public Sheets getSheets() {
         try {
-            InputStream inputStream = GoogleSheetService.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+            File file = new File(propertiesBean.getGooJsonPath());
+            InputStream inputStream = Files.newInputStream(file.toPath());
+            // InputStream inputStream = GoogleSheetService.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
             GoogleCredential credential = GoogleCredential.fromStream(inputStream).createScoped(SCOPES);
             NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
             return new Sheets.Builder(httpTransport, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME).build();
